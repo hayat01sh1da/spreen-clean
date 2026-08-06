@@ -4,7 +4,7 @@ dry run that prints what would be removed before anything is touched."""
 
 from .application import Application
 
-__version__ = '0.1.0'
+__version__ = '0.1.2'
 
 __all__ = [
     'Application',

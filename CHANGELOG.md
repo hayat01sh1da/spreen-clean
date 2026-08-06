@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).  
 One repository hosts two packages, so releases are tagged per ecosystem (`ruby-vX.Y.Z` for the RubyGems gem, `python-vX.Y.Z` for the PyPI library).
 
+## [0.1.2] - 2026-08-06
+
+A maintenance release for both packages — the `file-clean` CLI and the library behaviour are unchanged from 0.1.1.
+
+### 1. Fixed
+
+- `spreen_clean.__version__` reported `0.1.0` on the `0.1.1` release.  
+  The constant in `PyPI/src/spreen_clean/__init__.py` is declared separately from the packaging metadata in `pyproject.toml`, and the `0.1.1` release bumped only the latter, so the published wheel carried a stale constant. Both now read `0.1.2`.  
+  The gem is unaffected: its gemspec reads the `VERSION` constant, so the version has a single source there.
+- `RubyGem/exe/file-clean` is now recorded with the executable bit set (`100644` -> `100755`), so the file shipped inside the gem is directly runnable.
+
+### 2. Changed
+
+- Development toolchain moved to CPython 3.14.7 (`PyPI/.python-version`) and the pinned development dependencies were refreshed (`RubyGem/Gemfile.lock`, `PyPI/requirements.lock`); Gemfile and Bundler moved 4.0.16 -> 4.0.18. Runtime dependencies are unchanged, and the published `requires-python` (`>= 3.10`) and `required_ruby_version` (`>= 3.4`) floors are untouched.
+- The per-ecosystem READMEs shipped inside the packages restate the refreshed toolchain versions.
+
 ## [0.1.1] - 2026-07-20
 
 ### 1. Fixed
